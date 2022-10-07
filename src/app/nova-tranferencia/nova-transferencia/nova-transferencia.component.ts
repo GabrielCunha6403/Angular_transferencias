@@ -10,14 +10,14 @@ import { TransferenciaService } from 'src/app/services/transferencia.service';
   styleUrls: ['./nova-transferencia.component.scss'],
 })
 export class NovaTransferenciaComponent implements OnInit {
-  @Output() aoTransferir = new EventEmitter<any>();
+  @Output() aoTransferir: EventEmitter<any> = new EventEmitter<any>();
 
   valor: number;
   destino: number;
 
   constructor(private service: TransferenciaService, private router: Router) {}
 
-  transferir() {
+  fazerTransferencia(): void {
     console.log('Transferência solicitada');
     const valorEmitir: Transferencia = {
       id: 0,
@@ -25,7 +25,7 @@ export class NovaTransferenciaComponent implements OnInit {
       destino: this.destino,
       data: new Date(),
     };
-    this.service.adicionar(valorEmitir).subscribe(
+    this.service.subirNovaTransferencia(valorEmitir).subscribe(
       (transferencia) => {
         console.log(transferencia);
         this.limparCampos();
@@ -35,7 +35,7 @@ export class NovaTransferenciaComponent implements OnInit {
     );
   }
 
-  limparCampos() {
+  limparCampos(): void {
     this.valor = 0;
     this.destino = 0;
   }

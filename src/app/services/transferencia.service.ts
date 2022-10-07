@@ -14,7 +14,7 @@ export class TransferenciaService {
     this.listaTransferencia = [];
   }
 
-  get transferencias() {
+  get transferencias(): any[] {
     return this.listaTransferencia;
   }
 
@@ -22,13 +22,13 @@ export class TransferenciaService {
     return this.httpClient.get<Transferencia[]>(this.url);
   }
 
-  adicionar(transferencia: Transferencia): Observable<Transferencia> {
-    this.hidratar(transferencia);
+  subirNovaTransferencia(transferencia: Transferencia): Observable<Transferencia> {
+    this.atualizarData(transferencia);
     
     return this.httpClient.post<Transferencia>(this.url, transferencia);
   }
 
-  hidratar(transferencia: any) {
+  atualizarData(transferencia: any) {
     transferencia.data = new Date();
   }
 }
